@@ -1,0 +1,65 @@
+
+{% extends 'myapp/base.html' %}
+{% load static %}
+    {% block content %}
+<div class="container">
+
+    <div class="r1 m-5">
+        <h1 class="text-center">Find Your Rental Home</h1>
+        <form class="d-flex " role="search" action="{% url 'search' %}">
+        <input class="form-control m-1 " name="searchbox"  type="search" placeholder="Enter Type 1bhk,2bhk,3bhk" aria-label="Search" >
+        <button class="btn btn-outline-success " type="submit">Search</button>
+      </form>
+
+    </div>
+    <h1 class="text-center text-warning">For Renters</h1>
+    <h2 class="text-center">Let our search guide you</h2>
+    <div class="row">
+
+        <div class="col-sm-8">
+            Search thousands of up-to-date property listings on our easy-to-use website. Narrow down your options by choosing what's most important to you, such as number of bedrooms and bathrooms, price range, location, pet policy and more.
+Parents can also search for rentals that fall within a particular school district.
+
+        </div>
+        <div class="col-sm-4">
+         <img src="{% static 'myapp/images/img27.jpg' %}" class="img-fluid">
+        </div>
+    </div>
+
+    <h1 class="text-center text-warning"> FOR LANDLORDS</h1>
+    <h2 class="text-center">Simple and streamlined rental management all under a single roof</h2>
+    <div class="row">
+
+        <div class="col-sm-4">
+           <img src="{% static 'myapp/images/img26.jpg' %}" class="img-fluid">
+
+        </div>
+        <div class="col-sm-8">
+
+            List your rental property
+Post your rental property in minutes to reach millions of potential renters.
+        </div>
+    </div>
+    <h1 class="text-center">Choose your dream flats</h1>
+
+    <div class="row">
+        {% for m in po %}
+         <div class="col-sm-4">
+              <div class="alert alert-success" role="alert">
+            <img src="{{m.photo.url}}" alt="" class="card-img-top" height="200px">
+          <h4 class="alert-heading">Type:{{m.title}}</h4>
+            <h4 class="alert-heading">Rent:{{m.rent}}</h4>
+
+          <p><h4>Description</h4>{{m.desc|truncatechars:50}}</p>
+          <hr>
+             <a href="{% url 'onedata' m.id %}" class="btn btn-outline-primary">Read More</a>
+             <h4 class="alert-heading">Date:{{m.date}}</h4>
+         </div>
+          </div>
+
+          {% endfor %}
+         </div>
+
+   </div>
+</div>
+    {% endblock %}
